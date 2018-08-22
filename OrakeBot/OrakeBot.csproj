@@ -82,6 +82,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="rebirth_fantasy.CT" />
     <None Include="Resources\ExitButton_Pressed.png" />
   </ItemGroup>
   <ItemGroup>
