@@ -137,6 +137,32 @@ namespace OrakeBot
             }
         }
 
+        private void WriteMemory()
+        {
+            Process[] p = Process.GetProcessesByName("WoW");
+                    Console.WriteLine(p[0]);
+                    uint DELETE = 0x00010000;
+                    uint READ_CONTROL = 0x00020000;
+                    uint WRITE_DAC = 0x00040000;
+                    uint WRITE_OWNER = 0x00080000;
+                    uint SYNCHRONIZE = 0x00100000;
+                    uint END = 0xFFF; //if you have Windows XP or Windows Server 2003 you must change this to 0xFFFF
+                    uint PROCESS_ALL_ACCESS = (DELETE | READ_CONTROL | WRITE_DAC | WRITE_OWNER | SYNCHRONIZE | END);
+
+                    int processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, p[0].Id);
+                    int processSize = GetObjectSize("12");
+                    Process[] processes = Process.GetProcessesByName("WoW");
+                    using (Memory memory = new Memory(processes[0]))
+                    {
+                        IntPtr addressy = memory.GetAddress("\"WoW.exe\"+0087BCD4+88+28+6B4+3C+2C8");
+                        IntPtr addressx = memory.GetAddress("\"WoW.exe\"+0087BCD4+88+28+708+C+2A8");
+                        IntPtr addressz = memory.GetAddress("\"WoW.exe\"+0087BCD4+88+28+7C8+1A4+54");
+
+                        memory.WriteFloat(addressx, x);
+                        memory.WriteFloat(addressy, y);
+                        memory.WriteFloat(addressz, z);
+                    }
+        }
 
         #region DesignImplimentation
         private void p_menubar_MouseDown(object sender, MouseEventArgs e)
