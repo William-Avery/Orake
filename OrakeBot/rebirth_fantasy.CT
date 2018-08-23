@@ -4,7 +4,7 @@
     <CheatEntry>
       <ID>0</ID>
       <Description>"Y Axis"</Description>
-      <LastState Value="25" RealAddress="004AAFFC"/>
+      <LastState Value="31" RealAddress="004AAFFC"/>
       <Color>008000</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>rebirth_fantasy.exe+AAFFC</Address>
@@ -12,7 +12,7 @@
     <CheatEntry>
       <ID>2</ID>
       <Description>"X Axis"</Description>
-      <LastState Value="49" RealAddress="004AAFF8"/>
+      <LastState Value="28" RealAddress="004AAFF8"/>
       <Color>008000</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>rebirth_fantasy.exe+AAFF8</Address>
@@ -27,8 +27,8 @@
     </CheatEntry>
     <CheatEntry>
       <ID>4</ID>
-      <Description>"Stamina"</Description>
-      <LastState Value="68" RealAddress="0278DBA4"/>
+      <Description>"Stamina (Copper)"</Description>
+      <LastState Value="0" RealAddress="007FC4AC"/>
       <VariableType>Byte</VariableType>
       <Address>"rebirth_fantasy.exe"+000B9710</Address>
       <Offsets>
@@ -37,12 +37,32 @@
     </CheatEntry>
     <CheatEntry>
       <ID>6</ID>
-      <Description>"Health"</Description>
-      <LastState Value="17" RealAddress="0278DBA0"/>
+      <Description>"Health (Copper)"</Description>
+      <LastState Value="0" RealAddress="007FC4A8"/>
       <VariableType>Byte</VariableType>
       <Address>"rebirth_fantasy.exe"+000AA060</Address>
       <Offsets>
         <Offset>B8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"Health (Gold)"</Description>
+      <LastState Value="17" RealAddress="007FC830"/>
+      <VariableType>Byte</VariableType>
+      <Address>"rebirth_fantasy.exe"+000B9710</Address>
+      <Offsets>
+        <Offset>5D0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Stamina (Gold)"</Description>
+      <LastState Value="68" RealAddress="007FC834"/>
+      <VariableType>Byte</VariableType>
+      <Address>"rebirth_fantasy.exe"+000B9710</Address>
+      <Offsets>
+        <Offset>5D4</Offset>
       </Offsets>
     </CheatEntry>
   </CheatEntries>

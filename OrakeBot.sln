@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrakeBot", "OrakeBot\OrakeBot.csproj", "{42D6A921-FBC1-4CC1-A160-AFA14E213DEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebirthBot", "OrakeBot\RebirthBot.csproj", "{42D6A921-FBC1-4CC1-A160-AFA14E213DEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

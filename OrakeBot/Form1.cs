@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vanilla.CheatEngine;
 
@@ -89,7 +85,8 @@ namespace OrakeBot
         {
             return ((playery / 4) * 32) + 16;
         }
-
+        #region Read/Write
+        /*
         private void ReadMemory()
         {
             Process[] p = Process.GetProcessesByName("Aok HD");
@@ -136,7 +133,6 @@ namespace OrakeBot
                 }
             }
         }
-
         private void WriteMemory()
         {
             Process[] p = Process.GetProcessesByName("WoW");
@@ -163,8 +159,10 @@ namespace OrakeBot
                         memory.WriteFloat(addressz, z);
                     }
         }
-
+        */
+        #endregion
         #region DesignImplimentation
+
         private void p_menubar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -200,5 +198,88 @@ namespace OrakeBot
         }
         #endregion
 
+        private void p_menubar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void t_updatePlayer_Tick(object sender, EventArgs e)
+        {
+            Process[] p = Process.GetProcessesByName("rebirth_fantasy");
+            uint DELETE = 0x00010000;
+            uint READ_CONTROL = 0x00020000;
+            uint WRITE_DAC = 0x00040000;
+            uint WRITE_OWNER = 0x00080000;
+            uint SYNCHRONIZE = 0x00100000;
+            uint END = 0xFFF; //if you have Windows XP or Windows Server 2003 you must change this to 0xFFFF
+            uint PROCESS_ALL_ACCESS = (DELETE | READ_CONTROL | WRITE_DAC | WRITE_OWNER | SYNCHRONIZE | END);
+
+            int processHandle = OpenProcess(PROCESS_ALL_ACCESS, false, p[0].Id);
+            int processSize = GetObjectSize("12");
+
+            if (p.Length > 0)
+            {
+                using (Memory memory = new Memory(p[0]))
+                {
+                    //Pull Character information
+                    //Character Y
+                    IntPtr address = memory.GetAddress("\"rebirth_fantasy.exe\"+AAFFC");
+                    int playery = Convert.ToInt32(memory.ReadInt32(address));
+                    l_playery.Text = Convert.ToString(playery);
+
+                    //Character X
+                    address = memory.GetAddress("\"rebirth_fantasy.exe\"+AAFF8");
+                    int playerx = Convert.ToInt32(memory.ReadInt32(address));
+                    l_playerx.Text = Convert.ToString(playerx);
+
+                    //Health
+                    address = memory.GetAddress("\"rebirth_fantasy.exe\"+000B9710+5D0");
+                    int hp = Convert.ToInt32(memory.ReadInt32(address));
+                    byte[] bytes = ConvertInt32ToByteArray(hp);                         
+                    l_hp.Text = Convert.ToString(bytes[0]);
+
+                    //Stamina
+                    address = memory.GetAddress("\"rebirth_fantasy.exe\"+000B9710+5D0");
+                    hp = Convert.ToInt32(memory.ReadInt32(address));
+                    bytes = ConvertInt32ToByteArray(hp);
+                    l_hp.Text = Convert.ToString(bytes[0]);
+
+                    //Address Stamina
+
+
+                    //Camera Y
+                    //address = memory.GetAddress("\"Aok HD.exe\"+0013CF90");
+                    //int camera_y = Convert.ToInt32(memory.ReadInt32(address));
+
+                    ////Write to Game
+                    ////Mouse X
+                    //IntPtr a1 = memory.GetAddress("\"Wow.exe\"+0013D22C");
+                    //memory.WriteInt32(a1, mouse_x);
+
+                    ////Mouse Y
+                    //IntPtr a2 = memory.GetAddress("\"Wow.exe\"+0013D230");
+                    //memory.WriteInt32(a2, mouse_y);
+                }
+            }
+        }
+
+        public static byte[] ConvertInt32ToByteArray(Int32 I32)
+        {
+            return BitConverter.GetBytes(I32);
+        }
     }
 }
